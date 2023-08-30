@@ -37,6 +37,7 @@ const FollowMouse = () => {
           width: 40,
           height: 40,
           transform: `translate(${position.x}px, ${position.y}px)`,
+          display: enabled ? 'block' : 'none',
         }}
       />
       <button onClick={() => setEnabled(!enabled)}>
