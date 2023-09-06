@@ -1,7 +1,6 @@
 import './App.css';
 import { useCatFact } from './hooks/useCatFact';
 import { useCatImage } from './hooks/useCatImage';
-import { Test } from './components/test';
 
 function App() {
   const { fact, refreshFact } = useCatFact();
@@ -24,7 +23,6 @@ function App() {
           alt={`Image extracting using the first word for ${fact}`}
         />
       )}
-      <Test />
     </main>
   );
 }
