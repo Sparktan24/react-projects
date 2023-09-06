@@ -6,20 +6,26 @@ import { useCatImage } from './hooks/useCatImage';
 //  const CAT_ENDPOINT_IMAGE_URL = `https://cataas.com/cat/says/${firstWord}`;
 const CAT_PREFIX_IMAGE_URL = 'https://cataas.com';
 
-function App() {
+const useCatFact = () => {
   const [fact, setFact] = useState();
+
+  const refreshFact = () => {
+    getRandomFact().then((newFact) => setFact(newFact)); //  getRandomFact().then(setFact) < equivalent
+  };
+  //  GET FACT
+  useEffect(refreshFact, []);
+
+  return { fact, refreshFact };
+};
+
+function App() {
+  const { fact, refreshFact } = useCatFact();
   const { imageUrl } = useCatImage({ fact }); //  Custom hook
-  //  const prefixUrl = useCatImage();
+
   const completeUrl = `${CAT_PREFIX_IMAGE_URL}${imageUrl}`;
 
-  //  Get fact on load
-  useEffect(() => {
-    getRandomFact().then((newFact) => setFact(newFact)); //  getRandomFact().then(setFact) < equivalent
-  }, []);
-
   const handleClick = async () => {
-    const newFact = await getRandomFact();
-    setFact(newFact);
+    refreshFact();
   };
 
   return (
