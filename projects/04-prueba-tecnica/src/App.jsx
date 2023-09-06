@@ -2,14 +2,11 @@ import './App.css';
 import { useCatFact } from './hooks/useCatFact';
 import { useCatImage } from './hooks/useCatImage';
 
-//  const CAT_ENDPOINT_IMAGE_URL = `https://cataas.com/cat/says/${firstWord}`;
-const CAT_PREFIX_IMAGE_URL = 'https://cataas.com';
-
 function App() {
   const { fact, refreshFact } = useCatFact();
   const { imageUrl } = useCatImage({ fact }); //  Custom hook
 
-  const completeUrl = `${CAT_PREFIX_IMAGE_URL}${imageUrl}`;
+  //const completeUrl = `${CAT_PREFIX_IMAGE_URL}${imageUrl}`;
 
   const handleClick = async () => {
     refreshFact();
@@ -22,7 +19,7 @@ function App() {
       {fact && <p>{fact}</p>}
       {imageUrl && (
         <img
-          src={completeUrl}
+          src={imageUrl}
           alt={`Image extracting using the first word for ${fact}`}
         />
       )}

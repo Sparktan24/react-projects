@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getImage } from '../services/facts';
 
+const CAT_PREFIX_IMAGE_URL = 'https://cataas.com';
 //  CUSTOM HOOK
 export function useCatImage({ fact }) {
   const [imageUrl, setImageUrl] = useState();
@@ -12,5 +13,5 @@ export function useCatImage({ fact }) {
     getImage(firstWord).then((imageUrl) => setImageUrl(imageUrl));
   }, [fact]);
 
-  return { imageUrl };
+  return { imageUrl: `${CAT_PREFIX_IMAGE_URL}${imageUrl}` };
 } // { imageUrl: 'https:// ...'}
