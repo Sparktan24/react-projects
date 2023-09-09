@@ -1,7 +1,10 @@
 import './App.css';
 import { Movies } from './components/Movies';
+import { useMovies } from './hooks/useMovies';
 
 function App() {
+  const { movies: mappedMovies } = useMovies();
+
   return (
     <div className="page">
       <header>
@@ -13,7 +16,7 @@ function App() {
       </header>
 
       <main>
-        <Movies />
+        <Movies movies={mappedMovies} />
       </main>
     </div>
   );
