@@ -1,15 +1,15 @@
 /* eslint-disable react/prop-types */
 import responseMovies from '../mocks/with-results.json';
-import noResponseMovies from '../mocks/no-results.json';
+//  import noResponseMovies from '../mocks/no-results.json';
 
 const ListOfMovies = ({ movies }) => {
   return (
     <ul>
       {movies.map((movie) => (
-        <li key={movie.imdbID}>
-          <h3>{movie.Title}</h3>
-          <p>{movie.Year}</p>
-          <img src={movie.Poster} alt={movie.Title} />
+        <li key={movie.id}>
+          <h3>{movie.title}</h3>
+          <p>{movie.year}</p>
+          <img src={movie.poster} alt={movie.title} />
         </li>
       ))}
     </ul>
@@ -24,5 +24,16 @@ export const Movies = () => {
   const movies = responseMovies.Search;
   const hasMovies = movies?.length > 0;
 
-  return hasMovies ? <ListOfMovies movies={movies} /> : <NoMoviesResult />;
+  const mappedMovies = movies?.map((movie) => ({
+    id: movie.imdbID,
+    title: movie.Title,
+    year: movie.Year,
+    poster: movie.Poster,
+  }));
+
+  return hasMovies ? (
+    <ListOfMovies movies={mappedMovies} />
+  ) : (
+    <NoMoviesResult />
+  );
 };
