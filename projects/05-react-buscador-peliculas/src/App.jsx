@@ -1,29 +1,8 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import { Movies } from './components/Movies';
 import { useMovies } from './hooks/useMovies';
-
-function useSearch() {
-  const [search, updateSearch] = useState('');
-  const [error, setError] = useState(null);
-  const isFirstInput = useRef(true);
-
-  useEffect(() => {
-    if (isFirstInput.current) {
-      isFirstInput.current = search === '';
-      return;
-    }
-
-    if (search === '') {
-      setError('No se introdujo ningún titulo');
-      return;
-    }
-
-    setError(null);
-  }, [search]);
-
-  return { search, updateSearch, error };
-}
+import { useSearch } from './hooks/useSearch';
 
 function App() {
   const [sort, setSort] = useState(false);
@@ -35,9 +14,13 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
     //const { query } = Object.fromEntries(new window.FormData(e.target));
-
-    getMovies();
+    //  Direct parameter to call function just once
+    getMovies({ search });
   };
+
+  useEffect(() => {
+    console.log('getMovies');
+  }, [getMovies]);
 
   const handleSort = () => {
     setSort(!sort);
