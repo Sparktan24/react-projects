@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useRef, useState, useMemo, useCallback } from 'react';
 import { searchMovies } from '../services/movies';
 
