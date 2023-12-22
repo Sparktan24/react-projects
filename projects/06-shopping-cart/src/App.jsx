@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { products as initialProducts } from './mocks/products.json';
 import Products from './components/Products';
+import Header from './components/Header';
 
 function App() {
   const [products] = useState(initialProducts);
@@ -8,6 +9,9 @@ function App() {
     category: 'all',
     minPrice: 0,
   });
+
+  //const filterCat = [...new Set(products.map((product) => product.category))];
+  //console.log(filterCat);
 
   const filterProducts = (products) => {
     return products.filter((product) => {
@@ -22,7 +26,7 @@ function App() {
 
   return (
     <>
-      <h1>Shopping cart</h1>
+      <Header setFilters={setFilters} />
       <Products products={filteredProducts} />
     </>
   );
