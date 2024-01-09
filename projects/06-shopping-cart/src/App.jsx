@@ -1,13 +1,14 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { products as initialProducts } from './mocks/products.json';
 import Products from './components/Products';
 import Header from './components/Header';
+import Footer from './components/Footer';
+import { IS_DEVELOPMENT } from './config';
+import { FilterContext } from './context/filters';
 
 function useFilters() {
-  const [filters, setFilters] = useState({
-    category: 'all',
-    minPrice: 0,
-  });
+  const { filters, setFilters } = useContext(FilterContext);
+  console.log({ filters });
 
   //const filterCat = [...new Set(products.map((product) => product.category))];
   //console.log(filterCat);
@@ -20,18 +21,19 @@ function useFilters() {
       );
     });
   };
-  return { filterProducts, setFilters };
+  return { filters, filterProducts, setFilters };
 }
 
 function App() {
   const [products] = useState(initialProducts);
-  const { filterProducts, setFilters } = useFilters();
+  const { filters, filterProducts, setFilters } = useFilters();
   const filteredProducts = filterProducts(products);
 
   return (
     <>
       <Header setFilters={setFilters} />
       <Products products={filteredProducts} />
+      {IS_DEVELOPMENT && <Footer filters={filters} />}
     </>
   );
 }
