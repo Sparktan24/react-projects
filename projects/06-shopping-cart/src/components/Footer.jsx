@@ -1,7 +1,9 @@
 /* eslint-disable react/prop-types */
 import './Footer.css';
+import { useFilters } from '../hooks/useFilters';
 
-function Footer({ filters }) {
+function Footer() {
+  const {filters} = useFilters();
   return (
     <footer className="footer">
       {JSON.stringify(filters, null, 2)}
