@@ -1,11 +1,11 @@
 /* eslint-disable react/prop-types */
 import Filters from './Filters';
 
-function Header({ setFilters }) {
+function Header() {
   return (
     <header>
       <h1>React shop 🛒</h1>
-      <Filters setFilters={setFilters} />
+      <Filters />
     </header>
   );
 }
